@@ -24,7 +24,6 @@ const Form = (props) => {
     }
     setTaskName("");
     setTaskId("");
-    // console.log(taskName, taskId);
     props.onAddTask(taskName, taskId);
   };
   return (
