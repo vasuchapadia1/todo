@@ -13,11 +13,19 @@ const Form = (props) => {
   const taskIdHandleChange = (event) => {
     setTaskId(event.target.value);
   };
-  const handleSubmit = (event) => {
+  const handleClick = (event) => {
     event.preventDefault();
+    if (taskName.trim().length === 0 || taskId.trim().length === 0) {
+      return;
+    } else if (Number(taskId) < 1) {
+      return;
+    } else if (!Number(taskId)) {
+      return;
+    }
     setTaskName("");
     setTaskId("");
     // console.log(taskName, taskId);
+    props.onAddTask(taskName, taskId);
   };
   return (
     <div
@@ -36,6 +44,7 @@ const Form = (props) => {
           style={{
             margin: 15,
           }}
+          helperText="Please enter Task Name"
           onChange={taskHandleChange}
           value={taskName}
         />
@@ -46,10 +55,11 @@ const Form = (props) => {
           style={{
             margin: 15,
           }}
+          helperText="Please enter Task ID"
           onChange={taskIdHandleChange}
           value={taskId}
         />
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button variant="contained" onClick={handleClick}>
           Add Task
         </Button>
       </Card>
